@@ -1,0 +1,21 @@
+name: seriea-ml
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.10
+  - numpy
+  - pandas
+  - scipy
+  - scikit-learn
+  - matplotlib
+  - seaborn
+  - xgboost
+  - joblib
+  - pyyaml
+  - pip
+  - pip:
+      - shap
+      - scikit-plot
+      - tqdm

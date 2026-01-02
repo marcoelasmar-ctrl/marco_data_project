@@ -1,0 +1,87 @@
+======================================================================
+Serie A Prediction — Pipeline Output (Key Metrics)
+Run timestamp: 2026-01-02 21:52:11
+======================================================================
+
+1) Loading data...
+Looking for files in: c:\Users\marco\OneDrive\Desktop\marco_data_project\data\raw
+Found files: ['c:\\Users\\marco\\OneDrive\\Desktop\\marco_data_project\\data\\raw\\serieA2018-2019.csv', 'c:\\Users\\marco\\OneDrive\\Desktop\\marco_data_project\\data\\raw\\serieA2019-2020.csv', 'c:\\Users\\marco\\OneDrive\\Desktop\\marco_data_project\\data\\raw\\serieA2020-2021.csv', 'c:\\Users\\marco\\OneDrive\\Desktop\\marco_data_project\\data\\raw\\serieA2021-2022.csv', 'c:\\Users\\marco\\OneDrive\\Desktop\\marco_data_project\\data\\raw\\serieA2022-2023.csv', 'c:\\Users\\marco\\OneDrive\\Desktop\\marco_data_project\\data\\raw\\serieA2023-2024.csv', 'c:\\Users\\marco\\OneDrive\\Desktop\\marco_data_project\\data\\raw\\serieA2024-2025.csv']
+   Train size: 2212, Test size: 370
+   Train size: 2212, Test size: 370
+
+2) Running feature experiments (RF baseline)...
+
+--- RF - 1. Basic Form ---
+Accuracy:    0.4865
+Log Loss:    1.0699
+Brier Score: 0.6354
+   [1. Basic Form] Acc=0.4865  LogLoss=1.0699  Brier=0.6354
+
+--- RF - 2. + Match Stats ---
+Accuracy:    0.4730
+Log Loss:    1.0272
+Brier Score: 0.6135
+   [2. + Match Stats] Acc=0.4730  LogLoss=1.0272  Brier=0.6135
+
+--- RF - 3. + ELO & Context ---
+Accuracy:    0.5378
+Log Loss:    0.9628
+Brier Score: 0.5718
+   [3. + ELO & Context] Acc=0.5378  LogLoss=0.9628  Brier=0.5718
+
+Chosen features: ['Diff_AvgPointsLast5', 'Diff_AvgGoalsForLast5', 'Diff_AvgGoalsAgainstLast5', 'Diff_AvgPointsSeason', 'Diff_AvgShotsOnTargetLast5', 'Diff_AvgCornersLast5', 'Diff_AvgFoulsLast5', 'Diff_Elo', 'HomeElo', 'AwayElo', 'RestDays_Home', 'RestDays_Away']
+   -> Winner: 3. + ELO & Context (12 features) (LogLoss: 0.9628, Acc: 0.5378, Brier: 0.5718)
+
+3) Comparing models on best feature set...
+
+--- Logistic Regression ---
+Accuracy:    0.5324
+Log Loss:    0.9693
+Brier Score: 0.5794
+
+--- Random Forest ---
+Accuracy:    0.5378
+Log Loss:    0.9628
+Brier Score: 0.5718
+
+--- XGBoost ---
+Accuracy:    0.5297
+Log Loss:    0.9648
+Brier Score: 0.5741
+
+4) Tuning Hyperparameters for RandomForestClassifier...
+   ✓ Best Params: {'n_estimators': 100, 'min_samples_leaf': 2, 'max_features': 'log2', 'max_depth': 3}
+
+--- Baseline Champion ---
+Acc: 0.5378 | LogLoss: 0.9628 | Brier: 0.5718
+
+--- Tuned Champion ---
+Acc: 0.5378 | LogLoss: 0.9684 | Brier: 0.5764
+
+Tuning did not improve Log Loss — using BASELINE champion for deep dive.
+
+5) Deep Dive Analysis on Champion Model...
+
+Betting strategy summary:
+   Final bankroll: 998.00
+   ROI (on bankroll): -0.20%
+   ROI (on amount staked): -0.10%
+   Hit rate: 43.84%
+   Total staked: 2030.00
+   Bets: 203
+   Wins: 89
+   Margin threshold: 0.05
+   Stake: 10.0
+   Starting bankroll: 1000.0
+
+--- Baseline: Bookmaker Implied Probabilities ---
+Acc: 0.5351 | LogLoss: 0.9512 | Brier: 0.5656
+
+=== Final Model Comparison (Test Set) ===
+Logistic Regression       | Acc: 0.532  LogLoss: 0.969  Brier: 0.579
+Random Forest             | Acc: 0.538  LogLoss: 0.963  Brier: 0.572
+XGBoost                   | Acc: 0.530  LogLoss: 0.965  Brier: 0.574
+Champion Model (used)     | Acc: 0.538  LogLoss: 0.963  Brier: 0.572
+
+Saved: results\metrics.txt
+(Figures saved in: results\figures)
